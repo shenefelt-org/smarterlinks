@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  people_id: one
+  action: MyString
+  time: 2026-06-09 18:51:22
+
+two:
+  people_id: two
+  action: MyString
+  time: 2026-06-09 18:51:22

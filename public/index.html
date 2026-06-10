@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>shenefelt.cc | Welcome</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+    <style>
+        /* Centering layout and cute background matched to Pico's current theme */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            background-color: var(--pico-background-color);
+            margin: 0;
+        }
+
+        .tangela-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        /* Target the Tangela sprite for special animation */
+        .tangela-sprite {
+            display: block;
+            margin: 0 auto;
+            /* Makes the small sprite crisp instead of blurry */
+            image-rendering: pixelated;
+            /* 'viggle' (vine wiggle) animation is soft and inviting */
+            animation: viggle 4s ease-in-out infinite;
+            width: 96px;
+            /* Scaled up for visibility, maintaining quality */
+            height: auto;
+        }
+
+        /* The custom 'Viggle' (vine-wiggle) keyframes */
+        @keyframes viggle {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-1deg);
+            }
+
+            25% {
+                transform: translateY(-5px) rotate(1deg);
+            }
+
+            50% {
+                transform: translateY(0px) rotate(-2deg) scaleX(1.05);
+            }
+
+            75% {
+                transform: translateY(-3px) rotate(2deg);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            /* Using a highlight color for "cc" is a cute touch */
+        }
+
+        h1 span.highlight {
+            color: var(--pico-primary);
+        }
+
+        p.subtitle {
+            color: var(--pico-muted-color);
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            font-weight: 300;
+        }
+
+        /* Make the buttons soft and rounded, just like the error pages */
+        .pico-btn {
+            border-radius: 2rem;
+            padding: 0.75rem 2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <article style="background: transparent; border: none; box-shadow: none;">
+
+            <div class="tangela-container">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/114.png"
+                    alt="Tangela sprite" class="tangela-sprite">
+            </div>
+
+            <h1>shenefelt<span class="highlight">.cc</span></h1>
+
+            <p class="subtitle">
+                la la la la
+            </p>
+
+            <!-- <a href="/tickets" role="button" class="pico-btn">View My Tickets</a> -->
+
+        </article>
+    </main>
+
+</body>
+
+</html>

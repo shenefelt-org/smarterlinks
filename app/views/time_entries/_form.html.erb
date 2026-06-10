@@ -1,0 +1,32 @@
+<%= form_with(model: time_entry) do |form| %>
+  <% if time_entry.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(time_entry.errors.count, "error") %> prohibited this time_entry from being saved:</h2>
+
+      <ul>
+        <% time_entry.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :people_id_id, style: "display: block" %>
+    <%= form.text_field :people_id_id %>
+  </div>
+
+  <div>
+    <%= form.label :action, style: "display: block" %>
+    <%= form.text_field :action %>
+  </div>
+
+  <div>
+    <%= form.label :time, style: "display: block" %>
+    <%= form.datetime_field :time %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

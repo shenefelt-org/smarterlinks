@@ -1,0 +1,77 @@
+class Person < ApplicationRecord
+    has_many :time_entries, dependent: :destroy
+    has_one :person_information, dependent: :destroy
+    before_create :generate_new_id_number
+    before_save :set_full_name
+    before_save :generate_username
+    before_save :generate_email
+    before_create :set_hire_date
+
+    def hire_date_formatted
+        hire_date.strftime("%B %d, %Y") if hire_date.present?
+    end
+
+    def termination_date_formatted
+        term_date.strftime("%B %d, %Y") if term_date.present?
+    end
+
+    def clock_in
+        TimeEntry.create(person_id: id, time: Time.current, action: 'clock_in')
+    end
+
+    def clock_out
+        TimeEntry.create(person_id: id, time: Time.current, action: 'clock_out')
+    end
+
+    def login
+        TimeEntry.create(person_id: id, time: Time.current, action: 'login')
+    end
+
+    def logout
+        TimeEntry.create(person_id: id, time: Time.current, action: 'logout')
+    end
+
+    def terminate
+        update(term_date: Date.today)
+    end
+
+    def active?
+        return true if rehire_date.present?
+        term_date.nil? || term_date > Date.today
+    end
+
+    private
+    # Generate a new id_number by incrementing the maximum existing id_number in the database
+    def generate_new_id_number
+        self.id_number = (Person.maximum(:id_number) || 0) + 1
+    end
+
+    # Generate the full name by combining first_name and last_name
+    def set_full_name
+        self.name = "#{first_name} #{last_name}" || 'NULL'
+    end
+
+    # Generate a username by combining first_name and last_name in lowercase
+    def generate_username
+        username = "#{first_name.downcase}.#{last_name.downcase}"
+        if Person.exists?(username: username)
+            total = Person.where(username: username).count
+            username = "#{first_name.downcase}.#{last_name.downcase}#{total + 1}"
+        end
+        self.username = username
+    end
+
+    # Generate an email address by combining first_name and last_name in lowercase
+    def generate_email
+        email = "#{first_name.downcase}.#{last_name.downcase}@periwinkle-octopi.com"
+        if Person.exists?(email: email)
+            total = Person.where(email: email).count
+            email = "#{first_name.downcase}.#{last_name.downcase}#{total + 1}@periwinkle-octopi.com"
+        end
+        self.email = email
+    end
+
+    def set_hire_date
+        self.hire_date ||= Date.today
+    end
+end

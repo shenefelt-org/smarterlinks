@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <article>
+      <h1>Contact Us</h1>
+
+      <%= form_with(model: @contact_form, local: true) do |form| %>
+        <% if @contact_form.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@contact_form.errors.count, "error" ) %> prohibited this contact from being saved:
+            </h2>
+            <ul>
+              <% @contact_form.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+                <% end %>
+            </ul>
+          </div>
+          <% end %>
+
+            <div class="grid">
+              <div>
+                <%= form.label :name %>
+                  <%= form.text_field :name, placeholder: "Your Name" %>
+              </div>
+
+              <div>
+                <%= form.label :email %>
+                  <%= form.email_field :email, placeholder: "your@email.com" %>
+              </div>
+            </div>
+
+            <div>
+              <%= form.label :message %>
+                <%= form.text_area :message, placeholder: "Your message here..." , rows: 6 %>
+            </div>
+
+            <div>
+              <%= form.submit "Send Message" , class: "primary" %>
+            </div>
+            <% end %>
+    </article>
+  </div>
+</body>
+
+</html>

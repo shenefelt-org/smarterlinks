@@ -1,0 +1,27 @@
+<%= form_with(model: person_information) do |form| %>
+  <% if person_information.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(person_information.errors.count, "error") %> prohibited this person_information from being saved:</h2>
+
+      <ul>
+        <% person_information.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :dob, style: "display: block" %>
+    <%= form.date_field :dob %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

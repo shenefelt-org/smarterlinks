@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Tech</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <article>
+      <h1>New Tech</h1>
+
+      <%= form_with(model: @tech, local: true) do |form| %>
+        <% if @tech.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@tech.errors.count, "error" ) %> prohibited this tech from being saved:
+            </h2>
+            <ul>
+              <% @tech.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+                <% end %>
+            </ul>
+          </div>
+          <% end %>
+
+            <div class="grid">
+              <div>
+                <%= form.label :first_name %>
+                  <%= form.text_field :first_name, placeholder: "Tech First Name" %>
+              </div>
+
+              <div>
+                <%= form.label :last_name %>
+                  <%= form.text_field :last_name, placeholder: "Tech Last Name" %>
+              </div>
+
+              <div>
+                <%= form.label :description %>
+                  <%= form.text_area :description, placeholder: "Tech Description" , rows: 6 %>
+              </div>
+            </div>
+
+            <div>
+              <%= form.label :message %>
+                <%= form.text_area :message, placeholder: "Tech Message" , rows: 6 %>
+            </div>
+
+            <div>
+              <%= form.submit "Send Message" , class: "primary" %>
+            </div>
+            <% end %>
+    </article>
+  </div>
+</body>
+
+</html>
