@@ -1,5 +1,6 @@
 class Person < ApplicationRecord
     has_many :time_entries, dependent: :destroy
+    has_many :user_actions, dependent: :destroy
     has_one :person_information, dependent: :destroy
     before_create :generate_new_id_number
     before_save :set_full_name
@@ -24,11 +25,11 @@ class Person < ApplicationRecord
     end
 
     def login
-        TimeEntry.create(person_id: id, time: Time.current, action: 'login')
+        UserAction.create(person_id: id, action: 'login')
     end
 
     def logout
-        TimeEntry.create(person_id: id, time: Time.current, action: 'logout')
+        UserAction.create(person_id: id, action: 'logout')
     end
 
     def terminate
@@ -46,9 +47,9 @@ class Person < ApplicationRecord
         self.id_number = (Person.maximum(:id_number) || 0) + 1
     end
 
-    # Generate the full name by combining first_name and last_name
+    # Generate the full name by combining first_name, middle_name, and last_name
     def set_full_name
-        self.name = "#{first_name} #{last_name}" || 'NULL'
+        self.name = "#{first_name} #{middle_name} #{last_name}" || 'NULL'
     end
 
     # Generate a username by combining first_name and last_name in lowercase

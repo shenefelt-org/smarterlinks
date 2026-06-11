@@ -1,11 +1,15 @@
-<% content_for :title, "New person" %>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
 
-<h1>New person</h1>
+<% content_for :title, "Add Person" %>
 
-<%= render "form", person: @person %>
+  <h1>New person</h1>
 
-<br>
+  <%= render "form" , person: @person %>
 
-<div>
-  <%= link_to "Back to people", people_path %>
-</div>
+    <br>
+
+    <div>
+      <%= link_to "Back to people" , people_path %>
+    </div>

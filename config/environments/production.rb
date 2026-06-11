@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = { host: "periwinkle-octipi.com" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
   # config.action_mailer.smtp_settings = {
@@ -93,4 +93,11 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.log_level = :info
   config.log_tags = [ :request_id ]
+
+    config.hosts = [
+    "periwinkle-octipi.com",
+    "www.periwinkle-octipi.com",
+    "159.198.67.230"  # Also allow by IP for testing
+  ]
+
 end
