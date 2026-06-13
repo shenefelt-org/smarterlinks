@@ -1,22 +1,115 @@
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 
+  <style>
+    /* 1. Override Pico CSS defaults with your Periwinkle Palette */
+    :root {
+      --pico-font-family-sans-serif: Verdana, sans-serif;
+      --pico-background-color: #f0e6ff;
+      /* Lightest periwinkle */
+      --pico-color: #9d84b7;
+      /* Darkest for text */
+      --pico-h1-color: #9d84b7;
+      --pico-primary: #c8b6ff;
+      /* Primary accent */
+      --pico-primary-hover: #9d84b7;
+    }
+
+    /* 2. Page Container */
+    body {
+      background-color: #f0e6ff;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* 3. Notice/Flash Messages */
+    .periwinkle-notice {
+      background-color: #e6d9f0;
+      color: #9d84b7;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 2px solid #d4c5ff;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(157, 132, 183, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    /* 4. Grid Layout for the People */
+    #people {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    /* 5. Individual Person Cards */
+    .person-card {
+      background: #ffffff;
+      border: 2px solid #e6d9f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(157, 132, 183, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .person-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(157, 132, 183, 0.15);
+      border-color: #d4c5ff;
+    }
+
+    /* 6. Custom Link Styles */
+    .show-link {
+      color: #c8b6ff;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 1rem;
+      display: inline-block;
+      transition: color 0.2s ease;
+    }
+
+    .show-link:hover {
+      color: #9d84b7;
+    }
+
+    .new-person-container {
+      text-align: center;
+    }
+  </style>
 </head>
-<p style="color: green">
-  <%= notice %>
-</p>
 
 <% content_for :title, "People" %>
 
-  <h1>People</h1>
+  <% if notice.present? %>
+    <p class="periwinkle-notice">
+      <%= notice %>
+    </p>
+    <% end %>
 
-  <div id="people">
-    <% @people.each do |person| %>
-      <%= render person %>
-        <p>
-          <%= link_to "Show this person" , person %>
-        </p>
-        <% end %>
-  </div>
+      <h1>Everyone in this club</h1>
 
-  <%= link_to "New person" , new_person_path %>
+      <div id="people">
+        <% @people.each do |person| %>
+          <section class="person-card">
+            <div>
+              <%= render person %>
+            </div>
+
+            <%= link_to "Show this person" , person, class: "show-link" %>
+          </section>
+          <% end %>
+      </div>
+
+      <div class="new-person-container">
+        <%= link_to "New person" , new_person_path, role: "button" %>
+      </div>

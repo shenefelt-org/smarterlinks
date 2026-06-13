@@ -1,15 +1,255 @@
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+
+  <style>
+    /* 1. Override Pico CSS defaults with your Periwinkle Palette */
+    :root {
+      /* Global Backgrounds & Text Base */
+      --pico-font-family-sans-serif: Verdana, sans-serif;
+      --pico-background-color: #f0e6ff;
+      --pico-color: #9d84b7;
+      --pico-heading-color: #9d84b7;
+
+      /* Structural Card Layer */
+      --pico-card-background-color: #ffffff;
+      --pico-card-sectioning-background-color: #e6d9f0;
+
+      /* Form Input Styling */
+      --pico-form-element-color: #9d84b7;
+      --pico-form-element-border-color: #e6d9f0;
+      --pico-form-element-active-border-color: #c8b6ff;
+      --pico-form-element-focus-border-color: #c8b6ff;
+      --pico-form-element-placeholder-color: #d4c5ff;
+
+      /* Interactive Buttons & Accents */
+      --pico-primary: #c8b6ff;
+      --pico-primary-background: #c8b6ff;
+      --pico-primary-border: #c8b6ff;
+      --pico-primary-hover: #9d84b7;
+      --pico-primary-hover-border: #9d84b7;
+
+      /* Custom Focus Ring Glow */
+      --pico-form-element-focus-box-shadow: 0 0 0 4px rgba(200, 182, 255, 0.4);
+    }
+
+    /* 2. Page Container */
+    body {
+      background-color: var(--pico-background-color);
+      padding: 2rem 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* 3. Octopus Mascot Styles */
+    .hero-octopus-container {
+      position: relative;
+      width: 120px;
+      height: 140px;
+      margin: 0 auto 1.5rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .octo-head {
+      width: 90px;
+      height: 80px;
+      background: var(--pico-primary);
+      border-radius: 45px 45px 18px 18px;
+      position: relative;
+      box-shadow: inset -6px -6px 0 rgba(157, 132, 183, 0.3);
+      z-index: 2;
+    }
+
+    .octo-eye {
+      width: 16px;
+      height: 16px;
+      background: #ffffff;
+      border-radius: 50%;
+      position: absolute;
+      top: 40px;
+      box-shadow: 0 2px 4px rgba(157, 132, 183, 0.2);
+    }
+
+    .octo-eye::after {
+      content: '';
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background: var(--pico-color);
+      border-radius: 50%;
+      top: 5px;
+      right: 2px;
+    }
+
+    .eye-left {
+      left: 20px;
+    }
+
+    .eye-right {
+      right: 20px;
+    }
+
+    .octo-tentacles {
+      display: flex;
+      gap: 6px;
+      margin-top: -12px;
+      z-index: 1;
+    }
+
+    .tentacle {
+      width: 16px;
+      background: var(--pico-primary);
+      border-radius: 10px;
+      box-shadow: inset -2px -2px 0 rgba(157, 132, 183, 0.3);
+      transform-origin: top center;
+      animation: swim 1.5s ease-in-out infinite alternate;
+    }
+
+    .t1 {
+      animation-delay: 0.0s;
+      height: 36px;
+    }
+
+    .t2 {
+      animation-delay: 0.2s;
+      height: 44px;
+    }
+
+    .t3 {
+      animation-delay: 0.4s;
+      height: 44px;
+    }
+
+    .t4 {
+      animation-delay: 0.6s;
+      height: 36px;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    @keyframes swim {
+      0% {
+        transform: rotate(-8deg) translateY(0);
+      }
+
+      100% {
+        transform: rotate(8deg) translateY(-4px);
+      }
+    }
+
+    /* 4. Form Layout Overrides */
+    input[type="text"],
+    input[type="number"] {
+      color: var(--pico-form-element-color);
+      border-color: var(--pico-form-element-border-color);
+    }
+
+    #error_explanation {
+      border: 1px solid #ffcbd1;
+      background-color: #fff0f1;
+      color: #c53030;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    #error_explanation h2 {
+      color: #c53030;
+      font-size: 1.1rem;
+      margin-top: 0;
+    }
+
+    #error_explanation ul {
+      margin-bottom: 0;
+    }
+  </style>
 </head>
 
 <% content_for :title, "Add Person" %>
 
-  <h1>New person</h1>
+  <main class="container">
 
-  <%= render "form" , person: @person %>
-
-    <br>
-
-    <div>
-      <%= link_to "Back to people" , people_path %>
+    <div class="hero-octopus-container">
+      <div class="octo-head">
+        <div class="octo-eye eye-left"></div>
+        <div class="octo-eye eye-right"></div>
+      </div>
+      <div class="octo-tentacles">
+        <div class="tentacle t1"></div>
+        <div class="tentacle t2"></div>
+        <div class="tentacle t3"></div>
+        <div class="tentacle t4"></div>
+      </div>
     </div>
+
+    <article>
+      <header>
+        <h1 style="margin: 0; text-align: center;">New Person</h1>
+      </header>
+
+      <%= form_with(model: @person, local: true) do |form| %>
+
+        <% if @person.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@person.errors.count, "error" ) %> prohibited this person from being saved:
+            </h2>
+            <ul>
+              <% @person.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+                <% end %>
+            </ul>
+          </div>
+          <% end %>
+
+            <div class="grid">
+              <div>
+                <%= form.label :first_name %>
+                  <%= form.text_field :first_name, placeholder: "Enter first name" %>
+              </div>
+
+              <div>
+                <%= form.label :middle_name %>
+                  <%= form.text_field :middle_name, placeholder: "Enter middle name" %>
+              </div>
+
+              <div>
+                <%= form.label :last_name %>
+                  <%= form.text_field :last_name, placeholder: "Enter last name" %>
+              </div>
+            </div>
+
+            <div>
+              <%= form.label :working_location %>
+                <%= form.text_field :working_location, placeholder: "Enter working location" %>
+            </div>
+
+            <div>
+              <%= form.label :location_id %>
+                <%= form.number_field :location_id, placeholder: "Enter location ID" %>
+            </div>
+
+            <%= form.submit "Create Person" %>
+
+              <% end %>
+
+                <footer>
+                  <%= link_to "← Back to people" , people_path,
+                    style: "color: var(--pico-color); font-weight: bold; text-decoration: none;" %>
+                </footer>
+    </article>
+  </main>

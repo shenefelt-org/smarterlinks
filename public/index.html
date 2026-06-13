@@ -4,89 +4,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>shenefelt.cc | Welcome</title>
+
+    <link rel="icon" type="image/x-icon" href="/periwinkle-octi-logo.ico">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 
     <style>
-        /* Centering layout and cute background matched to Pico's current theme */
+        /* 1. Override Pico defaults with your Periwinkle palette */
+        :root {
+            --pico-font-family-sans-serif: Verdana, sans-serif;
+            --pico-background-color: #f0e6ff;
+            --pico-color: #9d84b7;
+            --pico-h1-color: #9d84b7;
+            --pico-primary: #c8b6ff;
+            --pico-primary-hover: #9d84b7;
+        }
+
+        /* 2. Centering layout and background */
         body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             min-height: 100vh;
             text-align: center;
-            background-color: var(--pico-background-color);
+            background-color: #f0e6ff;
+            /* Lightest Periwinkle */
             margin: 0;
+            font-family: Verdana, sans-serif;
         }
 
-        .tangela-container {
+        /* 3. Periwinkle Octopus Hero Styles */
+        .hero-octopus-container {
             position: relative;
-            margin-bottom: 1.5rem;
-            display: inline-block;
+            width: 120px;
+            height: 140px;
+            margin: 0 auto 0.25rem auto;
+            /* Very tight bottom margin to hug the caption */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: float 3s ease-in-out infinite;
         }
 
-        /* Target the Tangela sprite for special animation */
-        .tangela-sprite {
-            display: block;
-            margin: 0 auto;
-            /* Makes the small sprite crisp instead of blurry */
-            image-rendering: pixelated;
-            /* 'viggle' (vine wiggle) animation is soft and inviting */
-            animation: viggle 4s ease-in-out infinite;
-            width: 96px;
-            /* Scaled up for visibility, maintaining quality */
-            height: auto;
+        .octo-head {
+            width: 90px;
+            height: 80px;
+            background: #c8b6ff;
+            /* Medium Periwinkle */
+            border-radius: 45px 45px 18px 18px;
+            position: relative;
+            box-shadow: inset -6px -6px 0 rgba(157, 132, 183, 0.3);
+            z-index: 2;
         }
 
-        /* The custom 'Viggle' (vine-wiggle) keyframes */
-        @keyframes viggle {
+        .octo-eye {
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
+            border-radius: 50%;
+            position: absolute;
+            top: 40px;
+            box-shadow: 0 2px 4px rgba(157, 132, 183, 0.2);
+        }
+
+        .octo-eye::after {
+            content: '';
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background: #9d84b7;
+            /* Dark Periwinkle */
+            border-radius: 50%;
+            top: 5px;
+            right: 2px;
+        }
+
+        .eye-left {
+            left: 20px;
+        }
+
+        .eye-right {
+            right: 20px;
+        }
+
+        .octo-tentacles {
+            display: flex;
+            gap: 6px;
+            margin-top: -12px;
+            /* Pulls tentacles up under the head */
+            z-index: 1;
+        }
+
+        .tentacle {
+            width: 16px;
+            background: #c8b6ff;
+            /* Medium Periwinkle */
+            border-radius: 10px;
+            box-shadow: inset -2px -2px 0 rgba(157, 132, 183, 0.3);
+            transform-origin: top center;
+            animation: swim 1.5s ease-in-out infinite alternate;
+        }
+
+        .t1 {
+            animation-delay: 0.0s;
+            height: 36px;
+        }
+
+        .t2 {
+            animation-delay: 0.2s;
+            height: 44px;
+        }
+
+        .t3 {
+            animation-delay: 0.4s;
+            height: 44px;
+        }
+
+        .t4 {
+            animation-delay: 0.6s;
+            height: 36px;
+        }
+
+        @keyframes float {
 
             0%,
             100% {
-                transform: translateY(0px) rotate(-1deg);
-            }
-
-            25% {
-                transform: translateY(-5px) rotate(1deg);
+                transform: translateY(0px);
             }
 
             50% {
-                transform: translateY(0px) rotate(-2deg) scaleX(1.05);
-            }
-
-            75% {
-                transform: translateY(-3px) rotate(2deg);
+                transform: translateY(-12px);
             }
         }
 
+        @keyframes swim {
+            0% {
+                transform: rotate(-8deg) translateY(0);
+            }
+
+            100% {
+                transform: rotate(8deg) translateY(-4px);
+            }
+        }
+
+        /* Ollie's Caption Text */
+        .ollie-caption {
+            text-align: center;
+            color: #9d84b7;
+            font-style: italic;
+            font-weight: bolder;
+            font-size: 0.85rem;
+            /* Shrunk down to a caption size */
+            opacity: 0.7;
+            /* Softened so it doesn't distract */
+            margin-top: 0;
+            margin-bottom: 2rem;
+            /* Creates a clean break before the h1 */
+        }
+
+        /* 4. Typography */
         h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            margin-top: 1rem;
+            margin-top: 0;
             margin-bottom: 0.5rem;
-            /* Using a highlight color for "cc" is a cute touch */
+            color: #9d84b7;
         }
 
         h1 span.highlight {
-            color: var(--pico-primary);
+            color: #c8b6ff;
+            /* Medium Periwinkle for contrast */
         }
 
         p.subtitle {
-            color: var(--pico-muted-color);
+            color: #9d84b7;
+            opacity: 0.8;
             font-size: 1.4rem;
             max-width: 600px;
             margin: 0 auto 2.5rem auto;
             font-weight: 300;
         }
 
-        /* Make the buttons soft and rounded, just like the error pages */
+        /* 5. Custom Button */
         .pico-btn {
+            background-color: #c8b6ff;
+            border-color: #c8b6ff;
+            color: #ffffff;
             border-radius: 2rem;
             padding: 0.75rem 2rem;
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 1px;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .pico-btn:hover {
+            background-color: #9d84b7;
+            border-color: #9d84b7;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -96,18 +213,26 @@
     <main class="container">
         <article style="background: transparent; border: none; box-shadow: none;">
 
-            <div class="tangela-container">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/114.png"
-                    alt="Tangela sprite" class="tangela-sprite">
+            <div class="hero-octopus-container">
+                <div class="octo-head">
+                    <div class="octo-eye eye-left"></div>
+                    <div class="octo-eye eye-right"></div>
+                </div>
+                <div class="octo-tentacles">
+                    <div class="tentacle t1"></div>
+                    <div class="tentacle t2"></div>
+                    <div class="tentacle t3"></div>
+                    <div class="tentacle t4"></div>
+                </div>
             </div>
 
-            <h1>shenefelt<span class="highlight">.cc</span></h1>
+            <p class="ollie-caption">Moi, c'est Peri.</p>
+
+            <h1>With a super powered mind & <span class="highlight">mechanical K9</span></h1>
 
             <p class="subtitle">
-                la la la la
+                GS
             </p>
-
-            <!-- <a href="/tickets" role="button" class="pico-btn">View My Tickets</a> -->
 
         </article>
     </main>

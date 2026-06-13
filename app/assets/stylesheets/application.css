@@ -8,3 +8,70 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+/* 1. Updated Main Navbar Container */
+.periwinkle-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    background-color: #f0e6ff;
+    border-bottom: 2px solid #e6d9f0;
+    font-family: Verdana, sans-serif;
+    flex-wrap: wrap;
+    /* This prevents the squishing! */
+    gap: 1rem;
+    /* Adds a buffer between elements when they wrap */
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
+
+.nav-brand-text {
+    color: #9d84b7;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    /* Better spacing between links */
+}
+
+.nav-link {
+    color: #9d84b7;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background-color: #c8b6ff;
+    color: #ffffff;
+}
+
+/* 2. Add Mobile Responsiveness */
+@media (max-width: 600px) {
+    .periwinkle-nav {
+        flex-direction: column;
+        /* Stacks the brand and links vertically on phones */
+        padding: 1rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        /* Allows links to drop to a new line if you add a lot of them */
+    }
+}

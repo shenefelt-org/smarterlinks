@@ -1,0 +1,11 @@
+Light Periwinkle:    #f0e6ff
+Light Periwinkle 2:  #e6d9f0
+Light Periwinkle 3:  #d4c5ff
+Medium Periwinkle:   #c8b6ff
+Dark Periwinkle:     #9d84b7
+
+#f0e6ff — Backgrounds, gradients (lightest)
+#e6d9f0 — Borders, subtle accents
+#d4c5ff — Secondary elements
+#c8b6ff — Primary accent, hover states
+#9d84b7 — Text, dark accents (darkest)
