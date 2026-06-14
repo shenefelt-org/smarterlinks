@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>400 - Bad Request</title>
+  <title>404 - Page Not Found</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   <style>
@@ -17,7 +16,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    .container-error {
+    .container-404 {
       text-align: center;
       background: white;
       border-radius: 20px;
@@ -26,111 +25,93 @@
       max-width: 500px;
     }
 
-    .hero-octopus-container {
-      position: relative;
-      width: 120px;
-      height: 140px;
-      margin: 0 auto 1rem auto;
+    .bow-container {
+      margin: 2rem 0;
+      height: 120px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      animation: float 3s ease-in-out infinite;
+      justify-content: center;
     }
 
-    .octo-head {
-      width: 90px;
-      height: 80px;
-      background: #c8b6ff;
-      border-radius: 45px 45px 18px 18px;
+    .bow {
       position: relative;
-      box-shadow: inset -6px -6px 0 rgba(157, 132, 183, 0.3);
-      z-index: 2;
+      width: 100px;
+      height: 60px;
     }
 
-    .octo-eye {
-      width: 16px;
-      height: 16px;
-      background: #ffffff;
+    /* Left loop */
+    .bow-left {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: #c8b6ff;
       border-radius: 50%;
-      position: absolute;
-      top: 40px;
-      box-shadow: 0 2px 4px rgba(157, 132, 183, 0.2);
+      animation: wiggle-left 2s ease-in-out infinite;
+      box-shadow: 0 2px 8px rgba(157, 132, 183, 0.3);
     }
 
-    .octo-eye::after {
-      content: '';
+    /* Right loop */
+    .bow-right {
       position: absolute;
-      width: 7px;
-      height: 7px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: #d4c5ff;
+      border-radius: 50%;
+      animation: wiggle-right 2s ease-in-out infinite;
+      box-shadow: 0 2px 8px rgba(157, 132, 183, 0.3);
+    }
+
+    /* Center knot */
+    .bow-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
       background: #9d84b7;
       border-radius: 50%;
-      top: 5px;
-      right: 2px;
+      z-index: 10;
+      animation: spin 3s linear infinite;
     }
 
-    .eye-left {
-      left: 20px;
-    }
-
-    .eye-right {
-      right: 20px;
-    }
-
-    .octo-tentacles {
-      display: flex;
-      gap: 6px;
-      margin-top: -12px;
-      z-index: 1;
-    }
-
-    .tentacle {
-      width: 16px;
-      background: #c8b6ff;
-      border-radius: 10px;
-      box-shadow: inset -2px -2px 0 rgba(157, 132, 183, 0.3);
-      transform-origin: top center;
-      animation: swim 1.5s ease-in-out infinite alternate;
-    }
-
-    .t1 {
-      animation-delay: 0.0s;
-      height: 36px;
-    }
-
-    .t2 {
-      animation-delay: 0.2s;
-      height: 44px;
-    }
-
-    .t3 {
-      animation-delay: 0.4s;
-      height: 44px;
-    }
-
-    .t4 {
-      animation-delay: 0.6s;
-      height: 36px;
-    }
-
-    @keyframes float {
+    @keyframes wiggle-left {
 
       0%,
       100% {
-        transform: translateY(0px);
+        transform: translateY(-50%) rotate(-5deg) scale(1);
       }
 
       50% {
-        transform: translateY(-12px);
+        transform: translateY(-50%) rotate(5deg) scale(1.05);
       }
     }
 
-    @keyframes swim {
+    @keyframes wiggle-right {
+
+      0%,
+      100% {
+        transform: translateY(-50%) rotate(5deg) scale(1);
+      }
+
+      50% {
+        transform: translateY(-50%) rotate(-5deg) scale(1.05);
+      }
+    }
+
+    @keyframes spin {
       0% {
-        transform: rotate(-8deg) translateY(0);
+        transform: translate(-50%, -50%) rotate(0deg);
       }
 
       100% {
-        transform: rotate(8deg) translateY(-4px);
+        transform: translate(-50%, -50%) rotate(360deg);
       }
     }
 
@@ -192,42 +173,34 @@
     }
 
     @media (max-width: 600px) {
-      .container-error {
+      .container-404 {
         padding: 2rem 1rem;
-        margin: 1rem;
       }
 
       h1 {
         font-size: 3rem;
       }
 
-      .hero-octopus-container {
+      .bow {
         transform: scale(0.8);
-        margin-bottom: 0;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container-error">
-
-    <div class="hero-octopus-container">
-      <div class="octo-head">
-        <div class="octo-eye eye-left"></div>
-        <div class="octo-eye eye-right"></div>
-      </div>
-      <div class="octo-tentacles">
-        <div class="tentacle t1"></div>
-        <div class="tentacle t2"></div>
-        <div class="tentacle t3"></div>
-        <div class="tentacle t4"></div>
+  <div class="container-404">
+    <div class="bow-container">
+      <div class="bow">
+        <div class="bow-left"></div>
+        <div class="bow-right"></div>
+        <div class="bow-center"></div>
       </div>
     </div>
 
-    <h1>400</h1>
-    <div class="subtitle">Bad Request!</div>
-    <p>Peri didn't quite understand what you were asking for.</p>
+    <h1>404</h1>
+    <div class="subtitle">Nothing here!</div>
+    <p>what you sought, you didn't find.</p>
 
     <div class="button-group">
       <a href="/" class="home-link">Go Home</a>

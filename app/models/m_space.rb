@@ -1,0 +1,2 @@
+class MSpace < ApplicationRecord
+end

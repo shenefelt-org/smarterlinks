@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "M spaces" %>
+
+<h1>M spaces</h1>
+
+<div id="m_spaces">
+  <% @m_spaces.each do |m_space| %>
+    <%= render m_space %>
+    <p>
+      <%= link_to "Show this m space", m_space %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New m space", new_m_space_path %>
