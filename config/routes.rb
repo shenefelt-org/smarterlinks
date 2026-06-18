@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :posts
+  resources :user_comments
   resources :m_spaces
   resources :person_informations
   resources :time_entries

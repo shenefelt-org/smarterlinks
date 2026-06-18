@@ -1,61 +1,96 @@
 class Person < ApplicationRecord
     has_many :time_entries, dependent: :destroy
     has_many :user_actions, dependent: :destroy
+    has_many :user_comments, dependent: :destroy
+    has_many :posts, dependent: :destroy
     has_one :person_information, dependent: :destroy
 
     before_create :generate_new_id_number
+    before_create :set_hire_date
+
     before_save :set_full_name
     before_save :generate_username
     before_save :generate_email
-    before_create :set_hire_date
 
     self.filter_attributes = [
         :created_at,
         :updated_at,
+        :id
     ]
 
-    
-
+    # format the hire date
     def hire_date_formatted
         hire_date.strftime("%B %d, %Y") if hire_date.present?
     end
 
+    # format the termination date
     def termination_date_formatted
         term_date.strftime("%B %d, %Y") if term_date.present?
     end
 
+    # format the deleted at date
     def deleted_at_formatted
         deleted_at.strftime("%B %d, %Y") if deleted_at.present?
     end
+    
+    # format the rehire date
+    def rehire_date_formatted
+        rehire_date.strftime("%B %d, %Y") if rehire_date.present?
+    end
 
+    # clock the user in
     def clock_in
         TimeEntry.create(person_id: id, time: Time.current, action: 'clock_in')
     end
 
+    # clock the user out
     def clock_out
         TimeEntry.create(person_id: id, time: Time.current, action: 'clock_out')
     end
 
+    # log the user in
     def login
         UserAction.create(person_id: id, action: 'login')
     end
 
+    # log the user out
     def logout
         UserAction.create(person_id: id, action: 'logout')
     end
 
+    # terminate the user
     def terminate
         update(term_date: Date.today)
     end
 
-    def active?
-        return true if rehire_date.present?
-        term_date.nil? || term_date > Date.today
+    def rehire
+        update(rehire_date: Date.today)
     end
 
-    def soft_delete
-        update(term_date: Time.current)
+    def active?
+        term_date.nil?
     end
+
+    # soft delete the user      
+    # marks the user as terminated by setting the term_date to today
+    def soft_delete
+        update(term_date: Date.today)
+    end
+
+    # checkers 
+    def comments?
+        self.user_comments.exists?
+    end
+
+    def actions?
+        self.user_actions.exists?
+    end
+
+    def posts?
+        self.posts.exists?
+    end
+
+
 
     def display
        return nil if self.nil?
@@ -65,7 +100,7 @@ class Person < ApplicationRecord
        puts "Termination Date: #{termination_date_formatted}" unless !term_date.present?
        puts "Rehire Date: #{rehire_date_formatted}" unless !rehire_date.present?
        puts "Active: #{active?}"
-       puts "Terminated: #{!active?}" unless self.active?
+       puts "Terminated: #{!active?}" unless self.active? 
        puts "Working Location: #{working_location}" unless working_location.nil?
        puts "Location ID: #{location_id}" unless location_id.nil?
        puts 
